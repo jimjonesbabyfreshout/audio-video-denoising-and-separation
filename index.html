@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Audio/Video Denoising and Separation</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js"></script>
+<script type="module>  
+const form = document.getElementById("form");
+const settings = document.getElementById("settings");
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const file = document.getElementById("file").files[0];
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const denoisingAlgorithm = document.getElementById("denoising-algorithm").value;
+  const extractionAlgorithm = document.getElementById("extraction-algorithm").value;
+  const parameters = document.getElementById("parameters").value;
+
+  formData.append("denoisingAlgorithm", denoisingAlgorithm);
+  formData.append("extractionAlgorithm", extractionAlgorithm);
+  formData.append("parameters", parameters);
+
+  const response = await fetch("/api/process", {
+    method: "POST",
+    body: formData,
+  });
+
+  const data = await response.json();
+
+  const result = document.getElementById("result");
+  result.innerHTML = `<audio controls><source src="${data.denoisedUrl}" type="audio/mpeg"></audio>`;
+});
+
+const toggleDarkMode = () => {
+  const body = document.body;
+  body.classList.toggle("dark-mode");
+};
+
+const showSettings = () => {
+  settings.classList.toggle("show");
+};</script>
+  <script src="script.js"></script>
+</head>
+  
+
+<body>
+  <h1>Audio/Video Denoising and Separation</h1>
+  <p>
+    This page allows you to import an audio or video file and use advanced techniques and technology to denoise or separate
+    instrumentals and vocals with extreme precision.
+  </p>
+  <div class="top-bar">
+  <button id="dark-mode-button" onclick="toggleDarkMode()">Dark mode</button>
+  <button id="settings-button" onclick="showSettings()">Settings</button>
+</div>
+  <div id="settings" class="settings">
+  <h2>Settings</h2>
+  <label for="denoising-algorithm">Denoising algorithm:</label>
+  <select id="denoising-algorithm">
+    <option value="spectral-subtraction">Spectral subtraction</option>
+    <option value="wiener-filtering">Wiener filtering</option>
+    <option value="deep-neural-network">Deep neural network</option>
+  </select>
+  <label for="extraction-algorithm">Extraction algorithm:</label>
+  <select id="extraction-algorithm">
+    <option value="principal-component-analysis">Principal component analysis</option>
+    <option value="independent-component-analysis">Independent component analysis</option>
+    <option value="deep-neural-network">Deep neural network</option>
+  </select>
+  <label for="parameters">Parameters:</label>
+  <input type="text" id="parameters" />
+</div>
+  <form id="form">
+    <label for="file">Select an audio or video file:</label>
+    <input type="file" id="file" accept="audio/*,video/*" />
+    <button type="submit">Process</button>
+  </form>
+  <div id="result"></div>
+  <div id="settings">
+    <h2>Settings</h2>
+    <label for="denoising-algorithm">Denoising algorithm:</label>
+    <select id="denoising-algorithm">
+      <option value="spectral-subtraction">Spectral subtraction</option>
+      <option value="wiener-filtering">Wiener filtering</option>
+      <option value="deep-neural-network">Deep neural network</option>
+    </select>
+    <label for="extraction-algorithm">Extraction algorithm:</label>
+    <select id="extraction-algorithm">
+      <option value="principal-component-analysis">Principal component analysis</option>
+      <option value="independent-component-analysis">Independent component analysis</option>
+      <option value="deep-neural-network">Deep neural network</option>
+    </select>
+    <label for="parameters">Parameters:</label>
+    <input type="text" id="parameters" />
+  </div>
+</body>
+
+</html>
