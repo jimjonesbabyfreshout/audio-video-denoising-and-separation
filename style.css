@@ -1,3 +1,4 @@
+/* Overall Styling */
 body {
   font-family: sans-serif;
 }
@@ -6,57 +7,27 @@ h1 {
   margin-top: 0;
 }
 
-#form {
-  margin-bottom: 1em;
-}
-
+#form,
 #result {
   margin-bottom: 1em;
 }
 
+/* Settings Panel */
 #settings {
   background-color: #f5f5f5;
   padding: 1em;
   margin-bottom: 1em;
 }
-
 #settings label {
   display: block;
   margin-bottom: 0.5em;
 }
-
 #settings select,
 #settings input {
   width: 100%;
 }
 
-.settings {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  max-width: 400px;
-  padding: 1em;
-  background-color: #f5f5f5;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-
-.settings.show {
-  display: block;
-}
-
-.settings label {
-  display: block;
-  margin-bottom: 0.5em;
-}
-
-.settings select,
-.settings input {
-  width: 100%;
-}
+/* Top Bar */
 .top-bar {
   display: flex;
   justify-content: flex-end;
@@ -80,6 +51,7 @@ h1 {
   background-color: #eee;
 }
 
+/* Dark Mode */
 .dark-mode {
   background-color: #000;
   color: #fff;
@@ -90,4 +62,3 @@ h1 {
   background-color: #222;
   color: #fff;
 }
-  
